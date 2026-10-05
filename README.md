@@ -1,4 +1,17 @@
-# QA Test Planner (UA)
+# QA Planner (UA)
+
+Набір Claude Skills для QA-інженерів. Спочатку — рев'ю вимог, потім — тестова документація.
+
+| Skill | Коли застосовувати |
+|---|---|
+| [`requirements-review-skill`](requirements-review-skill/README.md) | Перевірити requirement / user story / AC перед тест-аналізом |
+| `qa-test-planner` | Згенерувати тест-план, ручні кейси, регресію або баг-репорт |
+
+Перед генерацією тестової документації проженіть вимогу через `requirements-review-skill`. Якщо вердикт не `Готова до тест-аналізу` — спочатку уточніть формулювання з BA. Після зеленого вердикту передайте в `qa-test-planner` блок **Готові факти** зі звіту рев'ю.
+
+---
+
+# QA Test Planner
 
 Комплексний Claude Skill для QA-інженерів: генерація тест-планів, ручних тест-кейсів, регресійних наборів, валідації дизайну проти Figma та структурованих баг-репортів.
 
@@ -158,37 +171,43 @@ Skill генерує документацію лише на основі над�
 
 ---
 
-## Структура skill'а
+## Структура репозиторію
 
 ```text
-qa-test-planner/
+QA-planner/
 ├── README.md
 ├── SKILL.md
-└── references/
-    ├── test_case_templates.md
-    ├── bug_report_templates.md
-    ├── regression_testing.md
-    └── figma_validation.md
+└── requirements-review-skill/
+    ├── SKILL.md
+    ├── README.md
+    ├── examples/
+    └── references/
 ```
+
+Повний перелік прикладів і довідок рев'ю — у [`requirements-review-skill/README.md`](requirements-review-skill/README.md).
 
 ---
 
 ## Як підключити
 
+Обидва skills підключаються окремо.
+
 ### Claude.ai
 1. `Customize` → `Skills`.
 2. `+` → `Create skill` → `Upload a skill`.
-3. Завантаж ZIP-архів папки `qa-test-planner`.
+3. Завантаж ZIP-архів потрібної папки: кореневі `SKILL.md` + `README.md` для `qa-test-planner`, або папку `requirements-review-skill`.
 4. Увімкни тумблер біля назви skill'а.
 
 ### Claude Code / VS Code
-Поклади папку в проєкт:
+Поклади папки в проєкт:
 ```text
 .claude/skills/qa-test-planner/
+.claude/skills/requirements-review-skill/
 ```
 або глобально:
 ```text
 ~/.claude/skills/qa-test-planner/
+~/.claude/skills/requirements-review-skill/
 ```
 
 ### Cowork
