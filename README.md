@@ -2,6 +2,8 @@
 
 Комплексний Claude Skill для QA-інженерів: генерація тест-планів, ручних тест-кейсів, регресійних наборів, валідації дизайну проти Figma та структурованих баг-репортів.
 
+Перед тест-аналізом використовуй окремий skill **requirements-review** — рев'ю вимоги за 7 критеріями якості. Див. [`requirements-review-skill/`](./requirements-review-skill/).
+
 ---
 
 ## Навіщо цей skill
@@ -158,18 +160,20 @@ Skill генерує документацію лише на основі над�
 
 ---
 
-## Структура skill'а
+## Структура репозиторію
 
 ```text
-qa-test-planner/
+QA-planner/
 ├── README.md
-├── SKILL.md
-└── references/
-    ├── test_case_templates.md
-    ├── bug_report_templates.md
-    ├── regression_testing.md
-    └── figma_validation.md
+├── SKILL.md                      # qa-test-planner
+└── requirements-review-skill/    # рев'ю вимог перед тест-аналізом
+    ├── SKILL.md
+    ├── README.md
+    └── examples/
+        └── quantity-field-review.md
 ```
+
+Skill `qa-test-planner` очікує шаблони в `references/` (тест-кейси, баг-репорти, регресія, Figma).
 
 ---
 
@@ -193,6 +197,19 @@ qa-test-planner/
 
 ### Cowork
 Додай через панель `Customize` → `Skills`.
+
+Підключення `requirements-review` описано в [`requirements-review-skill/README.md`](./requirements-review-skill/README.md).
+
+---
+
+## Зв'язок з requirements-review
+
+Рев'ю вимоги — окремий гейт. Не генеруй тест-кейси, поки `requirements-review` не дав статус `Готова до тест-аналізу` або команда свідомо прийняла ризик.
+
+| Етап | Skill |
+|---|---|
+| Рев'ю вимоги, питання до BA, DoR | [`requirements-review-skill/`](./requirements-review-skill/) |
+| Тест-план, тест-кейси, регресія, баг-репорт | `qa-test-planner` (цей skill) |
 
 ---
 
